@@ -28,7 +28,8 @@ setup(
             'simple_subscriber = diff_bot_py.simple_subscriber:main',
             'simple_parameter = diff_bot_py.simple_parameter:main',
             'simple_turtlesim_kinematics = diff_bot_py.simple_turtlesim_kinematics:main', 
-            
+            'simple_tf_kinematics = diff_bot_py.simple_tf_kinematics:main',
+            'simple_service_server = diff_bot_py.simple_service_server:main',
         ],
     },
 )

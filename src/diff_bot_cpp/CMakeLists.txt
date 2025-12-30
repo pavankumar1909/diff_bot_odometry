@@ -11,6 +11,9 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rcl_interfaces REQUIRED)
 find_package(turtlesim REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(tf2_ros REQUIRED)
+
 
 include_directories(include)
 
@@ -27,6 +30,8 @@ ament_target_dependencies(simple_parameter rclcpp rcl_interfaces)
 add_executable(simple_turtlesim_kinematics src/simple_turtlesim_kinematics.cpp)
 ament_target_dependencies(simple_turtlesim_kinematics rclcpp turtlesim std_msgs)
 
+add_executable(simple_tf_kinematics src/simple_tf_kinematics.cpp)
+ament_target_dependencies(simple_tf_kinematics rclcpp geometry_msgs tf2_ros)
 
 install(
   DIRECTORY include
@@ -38,6 +43,7 @@ install(TARGETS
   simple_subscriber
   simple_parameter
   simple_turtlesim_kinematics
+  simple_tf_kinematics
   DESTINATION lib/${PROJECT_NAME}
 )
 
