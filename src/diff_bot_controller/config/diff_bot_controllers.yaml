@@ -3,7 +3,7 @@ controller_manager:
     update_rate: 100 # Hz
     use_sim_time: true
 
-    bumperbot_controller:
+    diff_bot_controller:
       type: diff_drive_controller/DiffDriveController
 
     joint_state_broadcaster:
@@ -13,7 +13,7 @@ controller_manager:
       type: velocity_controllers/JointGroupVelocityController
 
 
-bumperbot_controller:
+diff_bot_controller:
   ros__parameters:
     type        : diff_drive_controller/DiffDriveController
     use_stamped_vel: true

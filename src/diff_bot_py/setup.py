@@ -30,6 +30,7 @@ setup(
             'simple_turtlesim_kinematics = diff_bot_py.simple_turtlesim_kinematics:main', 
             'simple_tf_kinematics = diff_bot_py.simple_tf_kinematics:main',
             'simple_service_server = diff_bot_py.simple_service_server:main',
+            'simple_service_client = diff_bot_py.simple_service_client:main'
         ],
     },
 )

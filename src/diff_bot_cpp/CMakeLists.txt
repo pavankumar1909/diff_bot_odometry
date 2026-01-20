@@ -13,6 +13,7 @@ find_package(rcl_interfaces REQUIRED)
 find_package(turtlesim REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(tf2_ros REQUIRED)
+find_package(diff_bot_msgs REQUIRED)
 
 
 include_directories(include)
@@ -31,7 +32,14 @@ add_executable(simple_turtlesim_kinematics src/simple_turtlesim_kinematics.cpp)
 ament_target_dependencies(simple_turtlesim_kinematics rclcpp turtlesim std_msgs)
 
 add_executable(simple_tf_kinematics src/simple_tf_kinematics.cpp)
-ament_target_dependencies(simple_tf_kinematics rclcpp geometry_msgs tf2_ros)
+ament_target_dependencies(simple_tf_kinematics rclcpp geometry_msgs tf2_ros diff_bot_msgs)
+
+add_executable(simple_service_server src/simple_service_server.cpp)
+ament_target_dependencies(simple_service_server rclcpp diff_bot_msgs)
+
+
+add_executable(simple_service_client src/simple_service_client.cpp)
+ament_target_dependencies(simple_service_client rclcpp diff_bot_msgs)
 
 install(
   DIRECTORY include
@@ -44,6 +52,8 @@ install(TARGETS
   simple_parameter
   simple_turtlesim_kinematics
   simple_tf_kinematics
+  simple_service_server
+  simple_service_client
   DESTINATION lib/${PROJECT_NAME}
 )
 
@@ -54,4 +64,5 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+ament_export_dependencies(diff_bot_msgs)
 ament_package()

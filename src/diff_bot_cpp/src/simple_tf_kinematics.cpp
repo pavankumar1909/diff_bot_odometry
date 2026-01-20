@@ -1,4 +1,4 @@
-#include "diff_bot_cpp_examples/simple_tf_kinematics.hpp"
+#include "diff_bot_cpp/simple_tf_kinematics.hpp"
 
 #include <chrono>
 
