@@ -2,15 +2,15 @@
 
 // L298N H-Bridge Connection PINs
 #define L298N_enA 9  // PWM
-#define L298N_enB 6  // PWM
-#define L298N_in4 5  // Dir Motor B
-#define L298N_in3 4  // Dir Motor B
-#define L298N_in2 7  // Dir Motor A
-#define L298N_in1 8  // Dir Motor A
+#define L298N_enB 10  // PWM
+#define L298N_in4 13  // Dir Motor B
+#define L298N_in3 12  // Dir Motor B
+#define L298N_in2 8  // Dir Motor A
+#define L298N_in1 7  // Dir Motor A
 
 // Wheel Encoders Connection PINs
-#define right_encoder_phaseA 12  // Interrupt 
-#define right_encoder_phaseB 13  
+#define right_encoder_phaseA 3  // Interrupt 
+#define right_encoder_phaseB 5  
 #define left_encoder_phaseA 2   // Interrupt
 #define left_encoder_phaseB 4
 
@@ -225,3 +225,174 @@ void leftEncoderCallback()
   }
   left_encoder_counter++;
 }
+
+
+
+
+
+
+
+// #include <Arduino.h>
+// #include <PID_v1.h>
+
+// // ===================== PIN CONFIG =====================
+// #define LEFT_ENC_A   2
+// #define LEFT_ENC_B   4
+// #define RIGHT_ENC_A  3
+// #define RIGHT_ENC_B  5
+
+// #define ENA   9
+// #define IN1   7
+// #define IN2   8
+
+// #define ENB   10
+// #define IN3   12
+// #define IN4   13
+
+// // ===================== CONSTANTS =====================
+// #define ENCODER_PPR  385.0
+// const unsigned long interval = 100; // ms
+
+// // ===================== ENCODERS =====================
+// volatile long right_encoder_counter = 0;
+// volatile long left_encoder_counter  = 0;
+
+// // ===================== SERIAL PARSING =====================
+// bool is_right_wheel_cmd = false;
+// bool is_left_wheel_cmd  = false;
+// bool is_right_wheel_forward = true;
+// bool is_left_wheel_forward  = true;
+
+// char value[6] = "00.00";
+// uint8_t value_idx = 0;
+
+// // ===================== VELOCITY =====================
+// double right_wheel_cmd_vel = 0.0;
+// double left_wheel_cmd_vel  = 0.0;
+
+// double right_wheel_meas_vel = 0.0;
+// double left_wheel_meas_vel  = 0.0;
+
+// // ===================== PID =====================
+// double right_pwm = 0.0;
+// double left_pwm  = 0.0;
+
+// PID rightPID(&right_wheel_meas_vel, &right_pwm, &right_wheel_cmd_vel, 12.0, 6.0, 0.1, DIRECT);
+// PID leftPID (&left_wheel_meas_vel,  &left_pwm,  &left_wheel_cmd_vel,  12.0, 6.0, 0.1, DIRECT);
+
+// unsigned long last_millis = 0;
+
+// // ===================== ISRs =====================
+// void rightEncoderISR() {
+//   right_encoder_counter++;
+// }
+
+// void leftEncoderISR() {
+//   left_encoder_counter++;
+// }
+
+// // ===================== SETUP =====================
+// void setup() {
+//   pinMode(LEFT_ENC_A, INPUT_PULLUP);
+//   pinMode(LEFT_ENC_B, INPUT_PULLUP);
+//   pinMode(RIGHT_ENC_A, INPUT_PULLUP);
+//   pinMode(RIGHT_ENC_B, INPUT_PULLUP);
+
+//   pinMode(ENA, OUTPUT);
+//   pinMode(IN1, OUTPUT);
+//   pinMode(IN2, OUTPUT);
+//   pinMode(ENB, OUTPUT);
+//   pinMode(IN3, OUTPUT);
+//   pinMode(IN4, OUTPUT);
+
+//   attachInterrupt(digitalPinToInterrupt(RIGHT_ENC_A), rightEncoderISR, RISING);
+//   attachInterrupt(digitalPinToInterrupt(LEFT_ENC_A), leftEncoderISR, RISING);
+
+//   rightPID.SetOutputLimits(0, 255);
+//   leftPID.SetOutputLimits(0, 255);
+//   rightPID.SetMode(AUTOMATIC);
+//   leftPID.SetMode(AUTOMATIC);
+
+//   Serial.begin(115200);
+// }
+
+// // ===================== LOOP =====================
+// void loop() {
+
+//   // -------- SERIAL COMMAND PARSER --------
+//   while (Serial.available()) {
+//     char chr = Serial.read();
+
+//     if (chr == 'r') {
+//       is_right_wheel_cmd = true;
+//       is_left_wheel_cmd = false;
+//       value_idx = 0;
+//     }
+//     else if (chr == 'l') {
+//       is_right_wheel_cmd = false;
+//       is_left_wheel_cmd = true;
+//       value_idx = 0;
+//     }
+//     else if (chr == 'p' || chr == 'n') {
+//       bool forward = (chr == 'p');
+
+//       if (is_right_wheel_cmd) {
+//         is_right_wheel_forward = forward;
+//         digitalWrite(IN1, forward);
+//         digitalWrite(IN2, !forward);
+//       }
+//       else if (is_left_wheel_cmd) {
+//         is_left_wheel_forward = forward;
+//         digitalWrite(IN3, forward);
+//         digitalWrite(IN4, !forward);
+//       }
+//     }
+//     else if (chr == ',') {
+//       if (is_right_wheel_cmd)
+//         right_wheel_cmd_vel = atof(value);
+//       else if (is_left_wheel_cmd)
+//         left_wheel_cmd_vel = atof(value);
+
+//       value_idx = 0;
+//       strcpy(value, "00.00");
+//     }
+//     else {
+//       if (value_idx < 5)
+//         value[value_idx++] = chr;
+//     }
+//   }
+
+//   // -------- VELOCITY + PID LOOP --------
+//   unsigned long now = millis();
+//   if (now - last_millis >= interval) {
+
+//     noInterrupts();
+//     long r_ticks = right_encoder_counter;
+//     long l_ticks = left_encoder_counter;
+//     right_encoder_counter = 0;
+//     left_encoder_counter = 0;
+//     interrupts();
+
+//     right_wheel_meas_vel =
+//       (r_ticks * (1000.0 / interval)) * (2.0 * PI / ENCODER_PPR);
+
+//     left_wheel_meas_vel =
+//       (l_ticks * (1000.0 / interval)) * (2.0 * PI / ENCODER_PPR);
+
+//     rightPID.Compute();
+//     leftPID.Compute();
+
+//     if (right_wheel_cmd_vel == 0) right_pwm = 0;
+//     if (left_wheel_cmd_vel == 0)  left_pwm  = 0;
+
+//     analogWrite(ENA, right_pwm);
+//     analogWrite(ENB, left_pwm);
+
+//     Serial.print("r:");
+//     Serial.print(right_wheel_meas_vel, 3);
+//     Serial.print(",l:");
+//     Serial.println(left_wheel_meas_vel, 3);
+
+//     last_millis = now;
+//   }
+// }
