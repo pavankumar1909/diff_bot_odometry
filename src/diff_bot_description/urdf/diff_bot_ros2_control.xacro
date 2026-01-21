@@ -4,18 +4,28 @@
 
 <ros2_control name="diffbot_control" type="system">
  
+  <xacro:if value="$(arg is_sim)">
+      <!--Ros2 Humble-->
+      <xacro:if value="$(arg is_ignition)">
+        <hardware>
+          <plugin>ign_ros2_control/IgnitionSystem</plugin>
+        </hardware>
+      </xacro:if>
+      
+      <!--Ros2 Iron or above-->
+      <xacro:unless value="$(arg is_ignition)">
+        <hardware>
+         <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+        </hardware>
+      </xacro:unless>
+  </xacro:if>  
 
-  <xacro:if value="$(arg is_ignition)">
+  <xacro:unless value="$(arg is_sim)">
     <hardware>
-      <plugin>ign_ros2_control/IgnitionSystem</plugin>
-    </hardware>
-  </xacro:if>
-
-   <xacro:unless value="$(arg is_ignition)">
-    <hardware>
-      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
-    </hardware>
-  </xacro:unless>
+      <plugin>diff_bot_firmware/diff_botInterface</plugin>
+      <param name="port" value="/dev/ttyUSB0"/>
+    </hardware> 
+  </xacro:unless>   
 
   <joint name="wheel_right_joint">
    <command_interface name="velocity">

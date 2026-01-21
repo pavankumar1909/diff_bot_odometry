@@ -14,6 +14,7 @@ find_package(turtlesim REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(diff_bot_msgs REQUIRED)
+find_package(rclcpp_lifecycle REQUIRED)
 
 
 include_directories(include)
@@ -41,6 +42,9 @@ ament_target_dependencies(simple_service_server rclcpp diff_bot_msgs)
 add_executable(simple_service_client src/simple_service_client.cpp)
 ament_target_dependencies(simple_service_client rclcpp diff_bot_msgs)
 
+add_executable(simple_lifecycle_node src/simple_lifecycle_node.cpp)
+ament_target_dependencies(simple_lifecycle_node rclcpp_lifecycle rclcpp std_msgs)
+
 install(
   DIRECTORY include
   DESTINATION include
@@ -52,6 +56,7 @@ install(TARGETS
   simple_parameter
   simple_turtlesim_kinematics
   simple_tf_kinematics
+  simple_lifecycle_node
   simple_service_server
   simple_service_client
   DESTINATION lib/${PROJECT_NAME}

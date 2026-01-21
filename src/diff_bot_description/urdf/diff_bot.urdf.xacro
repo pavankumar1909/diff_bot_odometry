@@ -4,6 +4,8 @@
 
   <xacro:arg name="is_ignition" default="True"/>
 
+  <xacro:arg name="is_sim" default="True"/>
+
   <!-- Include Gazebo Parameters -->
   <xacro:include filename="$(find diff_bot_description)/urdf/diff_bot_gazebo.xacro" />
 

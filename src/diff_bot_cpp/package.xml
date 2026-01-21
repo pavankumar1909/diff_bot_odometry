@@ -16,7 +16,7 @@
   <depend>geometry_msgs</depend>
   <depend>tf2_ros</depend>
   <depend>diff_bot_msgs</depend>
-  
+  <depend>rclcpp_lifecycle</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

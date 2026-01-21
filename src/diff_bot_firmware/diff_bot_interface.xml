@@ -1,0 +1,10 @@
+<library path="diff_bot_firmware">
+    <class name="diff_bot_firmware/diff_botInterface"
+      type="diff_bot_firmware::diff_botInterface"
+      base_class_type="hardware_interface::SystemInterface"
+    >
+      <description>
+        diff Hardware Interface
+      </description>
+    </class>
+  </library>
