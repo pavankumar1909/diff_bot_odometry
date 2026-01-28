@@ -31,7 +31,11 @@ setup(
             'simple_tf_kinematics = diff_bot_py.simple_tf_kinematics:main',
             'simple_service_server = diff_bot_py.simple_service_server:main',
             'simple_service_client = diff_bot_py.simple_service_client:main',
-            'simple_lifecycle_node = diff_bot_py.simple_lifecycle_node:main'
+            'simple_lifecycle_node = diff_bot_py.simple_lifecycle_node:main',
+            'simple_action_server = diff_bot_py.simple_action_server:main',
+            'simple_action_client = diff_bot_py.simple_action_client:main',
+            'simple_qos_publisher = diff_bot_py.simple_qos_publisher:main',
+            'simple_qos_subscriber = diff_bot_py.simple_qos_subscriber:main'
         ],
     },
 )

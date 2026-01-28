@@ -1,6 +1,7 @@
 import os
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
+from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
 
 
@@ -35,9 +36,24 @@ def generate_launch_description():
             "use_sim_time": "True"
         }.items()
     )
+
+    # teleop_keyboard = Node(
+    #     package="teleop_twist_keyboard",
+    #     executable="teleop_twist_keyboard",
+    #     name="teleop_twist_keyboard",
+    #     output="screen",
+    #     prefix="xterm -e",     # IMPORTANT: opens a terminal for keyboard input
+    #     parameters=[{
+    #         "use_sim_time": True
+    #     }],
+    #     remappings=[
+    #         ("/cmd_vel", "/diff_bot_controller/cmd_vel")
+    #     ]
+    # )
     
     return LaunchDescription([
         gazebo,
         controller,
-        joystick,
+        joystick
+        #teleop_keyboard
     ])
