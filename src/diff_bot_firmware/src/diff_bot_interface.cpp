@@ -49,7 +49,8 @@ CallbackReturn diff_botInterface::on_init(const hardware_interface::HardwareInfo
   position_states_.reserve(info_.joints.size());
   velocity_states_.reserve(info_.joints.size());
   last_run_ = rclcpp::Clock().now();
-
+  
+  RCLCPP_INFO(rclcpp::get_logger("diff_botInterface"), "The Serial Port provided is: %s", port_.c_str());
   return CallbackReturn::SUCCESS;
 }
 

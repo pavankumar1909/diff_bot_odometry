@@ -45,7 +45,7 @@ def generate_launch_description():
 
     imu_driver_node = Node(
         package="diff_bot_firmware",
-        executable="mpu6050_driver"    
+        executable="mpu6050_driver.py"    
     )
     return LaunchDescription(
         [

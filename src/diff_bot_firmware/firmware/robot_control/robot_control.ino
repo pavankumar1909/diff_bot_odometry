@@ -101,27 +101,27 @@ void loop() {
   while (Serial.available()) {
     char c = Serial.read();
 
-    if (c == 'r') { right_cmd = true; left_cmd = false; value_idx = 0; }
-    else if (c == 'l') { left_cmd = true; right_cmd = false; value_idx = 0; }
+    if (c == 'l') { right_cmd = true; left_cmd = false; value_idx = 0; }
+    else if (c == 'r') { left_cmd = true; right_cmd = false; value_idx = 0; }
 
-    else if (c == 'p') {
+    else if (c == 'n') {
       if (right_cmd && !right_forward) {
         digitalWrite(L298N_in1, HIGH); digitalWrite(L298N_in2, LOW);
         right_forward = true;
       }
       if (left_cmd && !left_forward) {
-        digitalWrite(L298N_in3, HIGH); digitalWrite(L298N_in4, LOW);
+        digitalWrite(L298N_in3, LOW); digitalWrite(L298N_in4, HIGH);
         left_forward = true;
       }
     }
 
-    else if (c == 'n') {
+    else if (c == 'p') {
       if (right_cmd && right_forward) {
         digitalWrite(L298N_in1, LOW); digitalWrite(L298N_in2, HIGH);
         right_forward = false;
       }
       if (left_cmd && left_forward) {
-        digitalWrite(L298N_in3, LOW); digitalWrite(L298N_in4, HIGH);
+        digitalWrite(L298N_in3, HIGH); digitalWrite(L298N_in4, LOW);
         left_forward = false;
       }
     }
