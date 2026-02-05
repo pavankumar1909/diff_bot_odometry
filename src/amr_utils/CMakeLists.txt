@@ -24,14 +24,19 @@ ament_python_install_package(${PROJECT_NAME})
 add_executable(safety_stop src/safety_stop.cpp)
 ament_target_dependencies(safety_stop rclcpp std_msgs sensor_msgs twist_mux_msgs rclcpp_action visualization_msgs geometry_msgs)
 
+add_executable(avoid_obstacles src/avoid_obstacles.cpp)
+ament_target_dependencies(avoid_obstacles rclcpp std_msgs sensor_msgs twist_mux_msgs rclcpp_action visualization_msgs geometry_msgs)
+
 install(TARGETS
     safety_stop
+    avoid_obstacles
     DESTINATION lib/${PROJECT_NAME}
 )
 
 
 install(PROGRAMS
     ${PROJECT_NAME}/safety_stop.py
+    ${PROJECT_NAME}/avoid_obstacles.py
     DESTINATION lib/${PROJECT_NAME}
 
 )
