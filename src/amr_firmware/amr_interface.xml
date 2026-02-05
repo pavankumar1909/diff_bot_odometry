@@ -1,0 +1,10 @@
+<library path="amr_firmware">
+    <class name="amr_firmware/amrInterface"
+      type="amr_firmware::amrInterface"
+      base_class_type="hardware_interface::SystemInterface"
+    >
+      <description>
+        diff Hardware Interface
+      </description>
+    </class>
+  </library>
