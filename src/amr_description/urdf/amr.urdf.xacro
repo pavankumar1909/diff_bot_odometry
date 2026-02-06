@@ -27,6 +27,7 @@
       <geometry>
         <mesh filename="package://amr_description/meshes/base_link.STL" />
       </geometry>
+      <material name="blue">
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
